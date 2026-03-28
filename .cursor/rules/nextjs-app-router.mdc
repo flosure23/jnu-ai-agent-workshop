@@ -1,0 +1,18 @@
+---
+description: Next.js App Router·라우팅·RSC·서버 API 규칙
+globs: app/**/*
+alwaysApply: false
+---
+
+# Next.js App Router
+
+## 반드시 할 것
+
+- 라우팅·`layout`·`loading`·`error`·템플릿은 **`app/`** 아래에서 구성한다.
+- 서버에서만 해야 하는 비밀 처리·관리자 작업은 **Route Handler** (`app/api/.../route.ts`) 또는 **Server Actions** 등 **서버 경로**에 둔다.
+- **React Server Components**를 기본으로 하고, 브라우저 API·이벤트·훅 등이 필요할 때만 해당 파일 상단에 `"use client"`를 붙인다.
+
+## 하지 말 것
+
+- **`pages/`** 디렉터리로 새 페이지나 API를 추가하지 않는다 (Pages Router 금지).
+- 필요 없는데 **`"use client"`**로 페이지·레이아웃 전체를 클라이언트 컴포넌트로 만들지 않는다 (가능하면 하위 컴포넌트만 클라이언트로 분리).

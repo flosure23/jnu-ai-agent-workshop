@@ -1,0 +1,26 @@
+---
+description: 프로젝트 기술 스택·AGENTS.md 참조·작업 범위 (항상 적용)
+alwaysApply: true
+---
+
+# 프로젝트 스택·공통 원칙
+
+자세한 규칙은 저장소 루트의 `AGENTS.md`를 함께 본다.
+
+## 기술 스택
+
+| 영역 | 선택 |
+|------|------|
+| 프레임워크 | Next.js **App Router** (`app/`)만 |
+| 언어 | **TypeScript** |
+| 스타일 | **Tailwind CSS** |
+| 데이터 | **Supabase** |
+
+## 반드시 할 것
+
+- `package.json`에 적힌 Next.js·Supabase 등 버전을 기준으로 한다.
+- 모호하면 **App Router + TypeScript + Tailwind + Supabase** 공식 문서 패턴을 따른다.
+
+## 하지 말 것
+
+- 사용자 요청과 무관한 **대규모 리팩터**나 **다른 파일 대량 수정**을 하지 않는다.

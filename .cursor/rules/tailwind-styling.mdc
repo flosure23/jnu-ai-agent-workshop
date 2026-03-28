@@ -1,0 +1,16 @@
+---
+description: Tailwind CSS·인라인 스타일 규칙
+globs: **/*.{tsx,css}
+alwaysApply: false
+---
+
+# 스타일 (Tailwind CSS)
+
+## 반드시 할 것
+
+- 스타일은 **Tailwind 유틸리티 클래스**를 우선 사용한다.
+- 프로젝트에 `tailwind.config`·전역 CSS가 있으면 **색·간격·폰트** 등을 그와 맞춘다.
+
+## 하지 말 것
+
+- 레이아웃·테마를 **`style={{}}` 인라인**으로 반복 구현하지 않는다. (Tailwind로 불가능한 경우만 예외적으로 최소한 사용.)
