@@ -48,7 +48,9 @@ export default function EntryDetailPage({
   }, [id]);
 
   useEffect(() => {
-    void load();
+    queueMicrotask(() => {
+      void load();
+    });
   }, [load]);
 
   async function handleDelete() {
@@ -73,16 +75,19 @@ export default function EntryDetailPage({
   if (entry === undefined && !loadError) {
     return (
       <div className="flex justify-center py-16">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-blue-600" />
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-border border-t-accent" />
       </div>
     );
   }
 
   if (loadError) {
     return (
-      <div className="text-center py-16">
-        <p className="text-red-600 mb-4">{loadError}</p>
-        <Link href="/entries" className="text-blue-600 hover:underline text-sm">
+      <div className="text-center py-16 max-w-[40rem] mx-auto">
+        <p className="text-danger mb-4">{loadError}</p>
+        <Link
+          href="/entries"
+          className="text-sm text-accent hover:text-accent-hover underline-offset-2 hover:underline"
+        >
           목록으로
         </Link>
       </div>
@@ -91,10 +96,13 @@ export default function EntryDetailPage({
 
   if (!entry) {
     return (
-      <div className="text-center py-16">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">404</h1>
-        <p className="text-gray-500 mb-6">일기를 찾을 수 없습니다.</p>
-        <Link href="/entries" className="text-blue-600 hover:underline text-sm">
+      <div className="text-center py-16 max-w-[40rem] mx-auto">
+        <h1 className="text-2xl font-semibold tracking-tight text-ink mb-2">404</h1>
+        <p className="text-muted mb-6">일기를 찾을 수 없습니다.</p>
+        <Link
+          href="/entries"
+          className="text-sm text-accent hover:text-accent-hover underline-offset-2 hover:underline"
+        >
           목록으로 돌아가기
         </Link>
       </div>
@@ -102,10 +110,10 @@ export default function EntryDetailPage({
   }
 
   return (
-    <article className="max-w-2xl mx-auto">
+    <article className="max-w-[40rem] mx-auto w-full">
       <Link
         href="/entries"
-        className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6"
+        className="inline-flex items-center gap-1 text-sm text-subtle hover:text-muted mb-6"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -114,25 +122,25 @@ export default function EntryDetailPage({
       </Link>
 
       <header className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">{entry.title}</h1>
-        <time className="text-sm text-gray-400">{entry.date}</time>
+        <h1 className="text-3xl font-semibold tracking-tight text-ink mb-2">{entry.title}</h1>
+        <time className="text-sm text-subtle tabular-nums">{entry.date}</time>
       </header>
 
-      <div className="prose prose-gray max-w-none mb-10 whitespace-pre-wrap text-gray-700 leading-relaxed">
+      <div className="max-w-[40rem] mx-auto w-full mb-10 whitespace-pre-wrap text-base leading-relaxed text-ink/95">
         {entry.content}
       </div>
 
-      <div className="flex gap-3 border-t border-gray-200 pt-6">
+      <div className="flex flex-wrap gap-3 border-t border-border pt-6">
         <Link
           href={`/entries/${entry.id}/edit`}
-          className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors"
+          className="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white hover:bg-accent-hover transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background"
         >
           수정
         </Link>
         <button
           type="button"
           onClick={() => setShowDelete(true)}
-          className="rounded-lg border border-red-300 px-5 py-2.5 text-sm font-semibold text-red-600 hover:bg-red-50 transition-colors"
+          className="rounded-lg border border-danger-ring px-5 py-2.5 text-sm font-semibold text-danger hover:bg-danger-muted transition-colors"
         >
           삭제
         </button>

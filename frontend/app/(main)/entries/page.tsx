@@ -22,10 +22,6 @@ export default function EntriesPage() {
     return () => clearTimeout(t);
   }, [searchQuery]);
 
-  useEffect(() => {
-    setPage(1);
-  }, [debouncedSearch]);
-
   const load = useCallback(async () => {
     setLoading(true);
     setListError(null);
@@ -58,13 +54,16 @@ export default function EntriesPage() {
   }, [page, debouncedSearch]);
 
   useEffect(() => {
-    void load();
+    queueMicrotask(() => {
+      void load();
+    });
   }, [load]);
 
   const totalPages = Math.max(1, Math.ceil(total / ENTRIES_PAGE_SIZE));
 
   const handleSearch = useCallback((q: string) => {
     setSearchQuery(q);
+    setPage(1);
   }, []);
 
   const showInitialLoading = useMemo(() => loading && entries.length === 0 && !listError, [loading, entries.length, listError]);
@@ -75,11 +74,11 @@ export default function EntriesPage() {
         {Array.from({ length: 3 }).map((_, i) => (
           <div
             key={i}
-            className="bg-white rounded-xl border border-gray-200 p-5 animate-pulse"
+            className="bg-surface rounded-xl border border-border p-5 animate-pulse"
           >
-            <div className="h-5 bg-gray-200 rounded w-1/3 mb-3" />
-            <div className="h-4 bg-gray-100 rounded w-full mb-2" />
-            <div className="h-4 bg-gray-100 rounded w-2/3" />
+            <div className="h-5 bg-surface-muted rounded w-1/3 mb-3" />
+            <div className="h-4 bg-border rounded w-full mb-2" />
+            <div className="h-4 bg-border rounded w-2/3" />
           </div>
         ))}
       </div>
@@ -93,7 +92,7 @@ export default function EntriesPage() {
       </div>
 
       {listError && (
-        <p className="text-sm text-red-600 bg-red-50 rounded-lg px-4 py-2 mb-4" role="alert">
+        <p className="text-sm text-danger bg-danger-muted rounded-lg px-4 py-2 mb-4" role="alert">
           {listError}
         </p>
       )}
@@ -101,13 +100,13 @@ export default function EntriesPage() {
       {entries.length === 0 && !loading ? (
         <div className="text-center py-16">
           {debouncedSearch ? (
-            <p className="text-gray-500">검색 결과가 없습니다</p>
+            <p className="text-muted">검색 결과가 없습니다</p>
           ) : (
             <>
-              <p className="text-gray-500 mb-4">첫 일기를 작성해보세요</p>
+              <p className="text-muted mb-4">첫 일기를 작성해보세요</p>
               <Link
                 href="/entries/new"
-                className="inline-block rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors"
+                className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-white hover:bg-accent-hover transition-colors"
               >
                 새 일기 쓰기
               </Link>
@@ -128,18 +127,18 @@ export default function EntriesPage() {
                 type="button"
                 disabled={page <= 1}
                 onClick={() => setPage((p) => p - 1)}
-                className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm text-muted hover:bg-surface-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               >
                 이전
               </button>
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-subtle tabular-nums">
                 {page} / {totalPages}
               </span>
               <button
                 type="button"
                 disabled={page >= totalPages}
                 onClick={() => setPage((p) => p + 1)}
-                className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm text-muted hover:bg-surface-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               >
                 다음
               </button>

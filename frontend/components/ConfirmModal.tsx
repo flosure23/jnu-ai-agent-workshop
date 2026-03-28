@@ -40,31 +40,33 @@ export default function ConfirmModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/35"
       onClick={onCancel}
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
     >
       <div
-        className="bg-white rounded-2xl shadow-lg w-full max-w-sm mx-4 p-6"
+        className="bg-surface rounded-2xl border border-border shadow-lg w-full max-w-sm mx-4 p-6"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 id="modal-title" className="text-lg font-bold text-gray-900 mb-2">
+        <h2 id="modal-title" className="text-lg font-semibold tracking-tight text-ink mb-2">
           {title}
         </h2>
-        <p className="text-sm text-gray-600 mb-6">{message}</p>
+        <p className="text-sm leading-relaxed text-muted mb-6">{message}</p>
         <div className="flex justify-end gap-3">
           <button
             ref={cancelRef}
+            type="button"
             onClick={onCancel}
-            className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-muted hover:bg-surface-muted transition-colors"
           >
             {cancelLabel}
           </button>
           <button
+            type="button"
             onClick={onConfirm}
-            className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 transition-colors"
+            className="rounded-lg bg-danger px-4 py-2 text-sm font-semibold text-white hover:bg-danger-hover transition-colors focus:outline-none focus:ring-2 focus:ring-danger-ring focus:ring-offset-2 focus:ring-offset-surface"
           >
             {confirmLabel}
           </button>

@@ -25,28 +25,31 @@ export default function GNB() {
   }
 
   return (
-    <nav className="bg-white border-b border-gray-200">
+    <nav className="bg-surface border-b border-border shadow-sm">
       <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-        <Link href="/entries" className="text-lg font-bold text-gray-900 shrink-0">
+        <Link
+          href="/entries"
+          className="text-lg font-semibold tracking-tight text-ink shrink-0"
+        >
           나만의 일기장
         </Link>
 
         <div className="hidden sm:flex items-center gap-3">
           <Link
             href="/entries/new"
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 transition-colors"
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background transition-colors"
           >
             새 일기
           </Link>
           {email && (
-            <span className="text-sm text-gray-500 hidden md:inline max-w-[200px] truncate">
+            <span className="text-sm text-subtle hidden md:inline max-w-[200px] truncate">
               {email}
             </span>
           )}
           <button
             type="button"
             onClick={handleLogout}
-            className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="rounded-lg border border-border bg-surface px-4 py-2 text-sm font-medium text-muted hover:bg-surface-muted transition-colors"
           >
             로그아웃
           </button>
@@ -55,7 +58,7 @@ export default function GNB() {
         <button
           type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="sm:hidden p-2 text-gray-600 hover:text-gray-900"
+          className="sm:hidden p-2 text-muted hover:text-ink"
           aria-label="메뉴 열기"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,11 +72,11 @@ export default function GNB() {
       </div>
 
       {mobileOpen && (
-        <div className="sm:hidden border-t border-gray-200 bg-white px-4 py-3 space-y-2">
+        <div className="sm:hidden border-t border-border bg-surface px-4 py-3 space-y-2">
           <Link
             href="/entries/new"
             onClick={() => setMobileOpen(false)}
-            className="block w-full text-center rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors"
+            className="block w-full text-center rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white hover:bg-accent-hover transition-colors"
           >
             새 일기
           </Link>
@@ -83,7 +86,7 @@ export default function GNB() {
               setMobileOpen(false);
               void handleLogout();
             }}
-            className="block w-full text-center rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="block w-full text-center rounded-lg border border-border px-4 py-2.5 text-sm font-medium text-muted hover:bg-surface-muted transition-colors"
           >
             로그아웃
           </button>

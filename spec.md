@@ -132,10 +132,11 @@ app/
 │   ├── login/page.tsx              # 로그인 (+ 비밀번호 찾기 링크)
 │   ├── signup/page.tsx             # 회원가입
 │   ├── forgot-password/page.tsx    # 비밀번호 찾기 — 이메일만 (간단 구현)
-│   ├── reset-password/page.tsx     # 메일 링크 후 새 비밀번호 입력
-│   └── auth/callback/route.ts      # 필요 시만: Supabase 리다이렉트·세션 교환
+│   └── reset-password/page.tsx     # 메일 링크 후 새 비밀번호 입력
+├── auth/
+│   └── callback/route.ts           # Supabase PKCE·세션 교환 (실제 URL: /auth/callback)
 ├── (main)/
-│   ├── layout.tsx                  # 인증 가드 + GNB
+│   ├── layout.tsx                  # GNB (로그인 보호는 middleware)
 │   ├── entries/
 │   │   ├── page.tsx                # 목록 + 검색 (US-5, US-7)
 │   │   ├── new/page.tsx            # 작성 (US-2)

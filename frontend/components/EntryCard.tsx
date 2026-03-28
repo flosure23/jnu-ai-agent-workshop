@@ -12,13 +12,15 @@ export default function EntryCard({ entry }: EntryCardProps) {
   return (
     <Link
       href={`/entries/${entry.id}`}
-      className="block bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md hover:border-gray-300 transition-all"
+      className="block bg-surface rounded-xl border border-border p-5 shadow-sm hover:shadow-md hover:border-muted/60 transition-all"
     >
       <div className="flex items-start justify-between gap-3 mb-2">
-        <h2 className="text-lg font-semibold text-gray-900 line-clamp-1">{entry.title}</h2>
-        <time className="text-sm text-gray-400 shrink-0">{entry.date}</time>
+        <h2 className="text-lg font-semibold tracking-tight text-ink line-clamp-1">
+          {entry.title}
+        </h2>
+        <time className="text-sm text-subtle tabular-nums shrink-0">{entry.date}</time>
       </div>
-      <p className="text-sm text-gray-600 line-clamp-2">{preview}</p>
+      <p className="text-sm leading-relaxed text-muted line-clamp-2">{preview}</p>
     </Link>
   );
 }

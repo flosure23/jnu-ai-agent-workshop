@@ -5,6 +5,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 
+const inputClass =
+  "w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-ink placeholder:text-subtle focus:outline-none focus:ring-2 focus:ring-accent/45 focus:border-accent";
+
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -50,12 +53,15 @@ function LoginForm() {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-      <h1 className="text-2xl font-bold text-center mb-8">로그인</h1>
+    <div className="bg-surface rounded-2xl border border-border shadow-sm p-8">
+      <h1 className="text-2xl font-semibold tracking-tight text-ink text-center mb-2">
+        로그인
+      </h1>
+      <p className="text-sm text-subtle text-center mb-8">나만의 일기장에 오신 것을 환영합니다</p>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="email" className="block text-sm font-medium text-muted mb-1">
             이메일
           </label>
           <input
@@ -65,12 +71,12 @@ function LoginForm() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
             autoComplete="email"
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className={inputClass}
           />
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="password" className="block text-sm font-medium text-muted mb-1">
             비밀번호
           </label>
           <input
@@ -80,12 +86,12 @@ function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="비밀번호"
             autoComplete="current-password"
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className={inputClass}
           />
         </div>
 
         {displayError && (
-          <p className="text-sm text-red-600 bg-red-50 rounded-lg px-4 py-2" role="alert">
+          <p className="text-sm text-danger bg-danger-muted rounded-lg px-4 py-2" role="alert">
             {displayError}
           </p>
         )}
@@ -93,19 +99,22 @@ function LoginForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="w-full rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {loading ? "로그인 중..." : "로그인"}
         </button>
       </form>
 
       <div className="mt-6 flex flex-col items-center gap-2 text-sm">
-        <Link href="/forgot-password" className="text-blue-600 hover:underline">
+        <Link
+          href="/forgot-password"
+          className="text-accent hover:text-accent-hover underline-offset-2 hover:underline"
+        >
           비밀번호를 잊으셨나요?
         </Link>
-        <p className="text-gray-500">
+        <p className="text-subtle">
           계정이 없으신가요?{" "}
-          <Link href="/signup" className="text-blue-600 hover:underline">
+          <Link href="/signup" className="text-accent hover:text-accent-hover font-medium underline-offset-2 hover:underline">
             회원가입
           </Link>
         </p>
@@ -118,7 +127,7 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 text-center text-gray-500">
+        <div className="bg-surface rounded-2xl border border-border shadow-sm p-8 text-center text-subtle text-sm">
           로딩 중...
         </div>
       }
